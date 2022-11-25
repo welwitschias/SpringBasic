@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+	<h2>Thymeleaf 링크처리 예제 페이지1</h2>
+	<h3>th:href 사용</h3>
+	<div>
+		<a th:href="@{/thymeleaf/ex01}">예제1 페이지 이동</a>
+	</div>
+	<div>
+		<a th:href="@{/thymeleaf/ex02}">예제2 페이지 이동</a>
+	</div>
+	<div>
+		<a th:href="@{/thymeleaf/ex03}">예제3 페이지 이동</a>
+	</div>
+	<div>
+		<a th:href="@{/thymeleaf/ex04}">예제4 페이지 이동</a>
+	</div>
+	<div>
+		<a th:href="@{/thymeleaf/ex05}">예제5 페이지 이동</a>
+	</div>
+	<div>
+		<a th:href="@{https://www.thymeleaf.org}">thymeleaf 공식 페이지 이동</a>
+	</div>
+	<!-- 전달할 매개변수를 입력한 경로 끝에 (key=value) 구조로 입력 -->
+	<div>
+		<a th:href="@{/thymeleaf/ex07(param1='파라미터 데이터1', param2='파라미터 데이터2')}">
+			thymeleaf 파라미터 전달
+		</a>
+	</div>
+</body>
+</html>

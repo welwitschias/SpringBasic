@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<link th:href="@{/css/layout.css}" rel="stylesheet">
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+	
+	<th:block layout:fragment="script"></th:block>
+	<th:block layout:fragment="css"></th:block>
+</head>
+<body>
+
+	<!-- th:replace= : 해당 속성이 선언된 html 태그를 다른 html 파일로 치환 -->
+	<div th:replace="fragments/header::header"></div>
+
+	<div layout:fragment="content" class="content">
+		<!-- layout에서 변경되는 영역 -->
+	</div>
+
+	<div th:replace="fragments/footer::footer"></div>
+
+</body>
+</html>
