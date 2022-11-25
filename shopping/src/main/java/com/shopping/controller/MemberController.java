@@ -27,12 +27,12 @@ public class MemberController {
     return "member/signIn";
   }
   
-//  @PostMapping(value = "/new")
-//  public String memberForm(MemberFormDto memberFormDto) {
-//    Member member = Member.createMember(memberFormDto, passwordEncoder);
-//    memberService.saveMember(member);
-//    return "redirect:/";
-//  }
+  // @PostMapping(value = "/new")
+  // public String memberForm(MemberFormDto memberFormDto) {
+  // Member member = Member.createMember(memberFormDto, passwordEncoder);
+  // memberService.saveMember(member);
+  // return "redirect:/";
+  // }
   
   // 검증하려는 객체 앞에 @Valid 선언, 파라미터로 bindingResult 객체 추가
   @PostMapping(value = "/new")
@@ -52,6 +52,17 @@ public class MemberController {
     }
     
     return "redirect:/";
+  }
+  
+  @GetMapping(value = "/login")
+  public String loginMember() {
+    return "/member/login";
+  }
+  
+  @GetMapping(value = "/login/error")
+  public String loginError(Model model) {
+    model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
+    return "/member/login";
   }
   
 }

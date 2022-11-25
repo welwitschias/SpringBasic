@@ -3,7 +3,6 @@ package com.shopping.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +34,15 @@ public class SecurityConfig {
         .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout")) // 로그아웃 URL
         .logoutSuccessUrl("/"); // 로그아웃 성공 시 이동할 페이지 URL
     
+    http.authorizeRequests()
+        .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll() // static 하위 파일은 인증(로그인)없이 경로에 접근할 수 있도록 설정
+        .mvcMatchers("/", "/members/**", "/item/**", "/images/**").permitAll() // 인증(로그인)없이 경로에 접근할 수 있도록 설정
+        .mvcMatchers("/admin/**").hasRole("ADMIN") // /admin으로 시작하는 경로는 관리자만 접근할 수 있도록 설정
+        .anyRequest().authenticated(); // 위에서 설정한 경로 외에는 모두 인증을 요구하도록 설정
+    
+    http.exceptionHandling()
+        .authenticationEntryPoint(new CustomAuthenticationEntryPoint()); // 인증되지 않은 사용자가 리소스에 접근하였을 때 수행
+    
     return http.build();
   }
   
@@ -42,12 +50,6 @@ public class SecurityConfig {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-  }
-  
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(memberservice)
-        .passwordEncoder(passwordEncoder());
   }
   
 }
