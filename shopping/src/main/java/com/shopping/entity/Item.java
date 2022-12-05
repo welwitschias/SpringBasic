@@ -1,7 +1,14 @@
 package com.shopping.entity;
 
-import java.time.LocalDateTime;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 import com.shopping.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +19,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity {
   
   @Id
   @Column(name = "item_id")
@@ -34,9 +41,5 @@ public class Item {
   
   @Enumerated(EnumType.STRING)
   private ItemSellStatus itemSellStatus; // 판매상태
-  
-  private LocalDateTime registerTime; // 등록시간
-  
-  private LocalDateTime updateTime; // 수정시간
   
 }
